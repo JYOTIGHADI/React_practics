@@ -1,1 +1,1 @@
-# React + Vite
+practics react
