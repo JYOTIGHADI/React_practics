@@ -4,16 +4,21 @@ import Navbar from './component/navbar'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
-const App = () => {
+import UseEffect from './pages/30-07/useffect'
+import UseState from './pages/30-07/usestate'
+function App() {
   return (
     <>
-    <Navbar/>
-     <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/register' element={<Register/>}/>
-      <Route path='/login' element={<Login/>}/>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/useffect' element={<UseEffect />} />
+        <Route path='/usestate' element={<UseState />} />
 
-     </Routes>
+
+      </Routes>
     </>
   )
 }
