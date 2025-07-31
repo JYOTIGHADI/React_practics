@@ -1,11 +1,27 @@
-# Flipkart Clone 🛒
+<h1 align="center">🚀 React  – Assignment</h1>
 
-This is a responsive Flipkart-like UI built using HTML and CSS only.
+<p align="center">
+  <img src="https://img.shields.io/badge/React-blue?style=for-the-badge&logo=react" />
+  
+</p>
 
-## Features
-- Home Page
-- Product List
-- Cart
-- Login/Register
+---
 
-👩‍💻 Built by Jyoti Ghadi
+## 📌 Project Overview
+
+This is a **React.js assignment** built to practice modern frontend development using:
+- React Components
+- Props & State
+- Functional UI Design
+- Component Tree Structure
+
+---
+
+## 💻 Technologies Used
+
+- React.js ⚛️  
+- JavaScript (ES6+)  
+- HTML5 & CSS3  
+- VS Code  
+    
+
