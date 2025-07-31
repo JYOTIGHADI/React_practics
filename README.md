@@ -1,3 +1,3 @@
-practics react
-day_2(Home , Login , Register)
-day_3 (useffect , usestate)
+<p align="center">
+  <img src="(https://github.com/JYOTIGHADI/React_practics)"  />
+</p>
