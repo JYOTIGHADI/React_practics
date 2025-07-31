@@ -24,4 +24,5 @@ This is a **React.js assignment** built to practice modern frontend development 
 - JavaScript (ES6+)  
 - HTML5 & CSS3  
 - VS Code  
+
     
