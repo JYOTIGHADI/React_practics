@@ -1,15 +1,5 @@
-// import React from 'react'
-
-// const Navbar = () => {
-//   return (
-//     <div>
-//       <h1>Navbar</h1>
-//     </div>
-//   )
-// }
-
-// export default Navbar
-
+// import React from "react "; 
+// import './navbar.css';  
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -21,6 +11,8 @@ const Navbar = () => {
       <button onClick={() => router("/register")}>Register</button>
       <button onClick={() => router("/useffect")}>UseEffect</button>
       <button onClick={() => router("/usestate")}>UseState</button>
+      <button onClick={() => router("/useparams")}>UseParams</button>
+     
 
     </>
   );

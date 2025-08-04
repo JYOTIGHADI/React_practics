@@ -6,6 +6,9 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import UseEffect from './pages/30-07/useffect'
 import UseState from './pages/30-07/usestate'
+import UseParams from './pages/01-08/useparams'
+import ParamsProduct from './pages/01-08/product'
+
 function App() {
   return (
     <>
@@ -16,6 +19,15 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/useffect' element={<UseEffect />} />
         <Route path='/usestate' element={<UseState />} />
+        <Route path='/useparams' element={<UseParams />} />
+        <Route path='/product' element={<ParamsProduct />} />
+        <Route path="/paramsproduct/:productID" element={<ParamsProduct />} />
+
+        
+
+        
+
+
 
 
       </Routes>
