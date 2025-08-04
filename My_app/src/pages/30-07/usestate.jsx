@@ -1,5 +1,6 @@
-import React from "react";
+// import React from "react";
 import { useState } from "react";
+
 function useStateexample() {
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [counter, setCounter] = useState(1);
