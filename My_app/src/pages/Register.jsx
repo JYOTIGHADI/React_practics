@@ -95,7 +95,7 @@ function Register() {
         />
 
         <button type="submit" style={styles.button}>
-          Register
+        Login
         </button>
       </form>
 

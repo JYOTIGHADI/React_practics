@@ -9,6 +9,7 @@ import UseState from './pages/30-07/usestate'
 import UseParams from './pages/01-08/useparams'
 import ParamsProduct from './pages/01-08/product'
 import Todo from './pages/02-08/Todo'
+import NotFound from './pages/06-08/Notfount'
 // import Delete from './pages/02-08/Delete'
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path='/product' element={<ParamsProduct />} />
         <Route path="/paramsproduct/:productID" element={<ParamsProduct />} />
         <Route path='/todo' element={<Todo />} />
+        <Route path='/Notfound' element={<NotFound />} />
         {/* <Route path='/delete' element={<Delete />} /> */}
 
 

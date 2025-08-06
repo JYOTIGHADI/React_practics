@@ -1,5 +1,5 @@
 import React from "react";
-// Assuming you have some styles for the Delete component
+
 
 const Delete = ({ onConfirm, onCancel }) => {
     return (

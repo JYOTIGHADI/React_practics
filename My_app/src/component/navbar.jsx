@@ -13,6 +13,7 @@ const Navbar = () => {
       <button onClick={() => router("/usestate")}>UseState</button>
       <button onClick={() => router("/useparams")}>UseParams</button>
       <button onClick={() => router("/todo")}>Todo</button>
+      <button onClick={() => router("/Notfound")}>NotFound</button>
 
     </>
   );
