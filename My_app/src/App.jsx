@@ -12,6 +12,10 @@ import ParamsProduct from './pages/01-08/product'
 import Todo from './pages/02-08/Todo'
 import NotFound from './pages/06-08/Notfount'
 import Fakestoreapi from './pages/06-08/Fakestoreapi'
+import Products from './pages/08-08/Products'
+// import ProductsInfo from './pages/08-08/ProductsInfo'
+import Mycart from './pages/08-08/Mycart'
+import ProductsInfo from './pages/08-08/ProductsInfo'
 
 // import Delete from './pages/02-08/Delete'
 
@@ -31,6 +35,9 @@ function App() {
         <Route path='/todo' element={<Todo />} />
         <Route path='/Notfound' element={<NotFound />} />
         <Route path='/fakestore' element={<Fakestoreapi/>} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/productsInfo/:productId" element={<ProductsInfo />} />
+        <Route path="/mycart" element={<Mycart />} />
         {/* <Route path='/delete' element={<Delete />} /> */}
 
 
