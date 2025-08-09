@@ -14,6 +14,8 @@ const Navbar = () => {
       <button onClick={() => router("/useparams")}>UseParams</button>
       <button onClick={() => router("/todo")}>Todo</button>
       <button onClick={() => router("/Notfound")}>NotFound</button>
+      <button onClick={() => router("/fakestore")}>Fetch Products</button>
+      {/* <button onClick={() => router("/delete")}>Delete</button> */}
 
     </>
   );

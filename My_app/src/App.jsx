@@ -1,4 +1,5 @@
 import './App.css'
+// import axios from 'axios'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './component/navbar'
 import Home from './pages/Home'
@@ -10,6 +11,8 @@ import UseParams from './pages/01-08/useparams'
 import ParamsProduct from './pages/01-08/product'
 import Todo from './pages/02-08/Todo'
 import NotFound from './pages/06-08/Notfount'
+import Fakestoreapi from './pages/06-08/Fakestoreapi'
+
 // import Delete from './pages/02-08/Delete'
 
 function App() {
@@ -27,6 +30,7 @@ function App() {
         <Route path="/paramsproduct/:productID" element={<ParamsProduct />} />
         <Route path='/todo' element={<Todo />} />
         <Route path='/Notfound' element={<NotFound />} />
+        <Route path='/fakestore' element={<Fakestoreapi/>} />
         {/* <Route path='/delete' element={<Delete />} /> */}
 
 

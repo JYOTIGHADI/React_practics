@@ -1,0 +1,86 @@
+/* Container for all products */
+.products-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Heading */
+.products-title {
+  text-align: center;
+  font-size: 1.8rem;
+  color: wheat;
+  margin-top: 20px;
+}
+
+/* Product card */
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  width: 220px;
+  cursor: pointer;
+  text-align: left;
+  background-color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Product image */
+.product-card img {
+  height: 200px;
+  width: 100%;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+/* Product title */
+.product-card p {
+  margin: 5px 0;
+}
+
+.product-card .title {
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Product price */
+.product-card .price {
+  font-weight: bold;
+  color: #e91e63;
+}
+
+/* Spinner container */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+/* Spinner styling */
+.spinner {
+  border: 3px solid #ccc;
+  border-top: 3px solid #333;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
