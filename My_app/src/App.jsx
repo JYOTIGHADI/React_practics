@@ -1,6 +1,6 @@
 import './App.css'
 // import axios from 'axios'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Router, Routes } from 'react-router-dom'
 import Navbar from './component/navbar'
 import Home from './pages/Home'
 import Login from './pages/Login'
@@ -16,6 +16,15 @@ import Products from './pages/08-08/Products'
 // import ProductsInfo from './pages/08-08/ProductsInfo'
 import Mycart from './pages/08-08/Mycart'
 import ProductsInfo from './pages/08-08/ProductsInfo'
+import UseMemoExample from './pages/10-08/UseMemo';
+import UseCallbackExample from './pages/10-08/UseCallback';
+
+
+
+
+
+
+
 
 // import Delete from './pages/02-08/Delete'
 
@@ -38,6 +47,13 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/productsInfo/:productId" element={<ProductsInfo />} />
         <Route path="/mycart" element={<Mycart />} />
+        <Route path="/usememo" element={<UseMemoExample />} />
+       <Route path="/usecallback" element={<UseCallbackExample />} />
+
+       
+
+
+
         {/* <Route path='/delete' element={<Delete />} /> */}
 
 

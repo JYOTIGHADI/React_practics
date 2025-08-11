@@ -16,10 +16,11 @@ const Navbar = () => {
       {/* <button onClick={() => router("/Notfound")}>NotFound</button> */}
       {/* <button onClick={() => router("/fakestore")}>Fetch Products</button> */}
       {/* <button onClick={() => router("/delete")}>Delete</button> */}
-      <button onClick={() => router("/products")}>Products</button>
-      <button onClick={() => router("/productsInfo/1")}>Product Info</button>
-
-      <button onClick={() => router("/mycart")}>My Cart</button>
+      {/* <button onClick={() => router("/products")}>Products</button> */}
+      {/* <button onClick={() => router("/productsInfo/1")}>Product Info</button> */}
+      {/* <button onClick={() => router("/mycart")}>My Cart</button> */}
+      <button onClick={() => router("/UseMemo")}>UseMemo</button>
+      <button onClick={() => router("/UseCallback")}>UseCallback</button>
     </>
   );
 };
