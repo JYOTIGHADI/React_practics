@@ -23,6 +23,7 @@ const UseReducerExample = () => {
 
   return (
     <div style={{ textAlign: "center", marginTop: "40px" }}>
+      <h1>UseReducer </h1>
       <h1>Counter: {state.counter}</h1>
       <button onClick={() => dispatch({ type: "INCREMENT_COUNTER" })}>+</button>
       <button onClick={() => dispatch({ type: "DECREMENT_COUNTER" })}>-</button>
