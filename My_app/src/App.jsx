@@ -18,6 +18,12 @@ import Mycart from './pages/08-08/Mycart'
 import ProductsInfo from './pages/08-08/ProductsInfo'
 import UseMemoExample from './pages/10-08/UseMemo';
 import UseCallbackExample from './pages/10-08/UseCallback';
+import UseRefExample from './pages/13-08/UseRef';
+// import UseReduceExample from './pages/13-08/UseReduce';
+import UseReducerExample from './pages/13-08/UseReduce'
+
+
+
 
 
 
@@ -43,14 +49,21 @@ function App() {
         <Route path="/paramsproduct/:productID" element={<ParamsProduct />} />
         <Route path='/todo' element={<Todo />} />
         <Route path='/Notfound' element={<NotFound />} />
-        <Route path='/fakestore' element={<Fakestoreapi/>} />
+        <Route path='/fakestore' element={<Fakestoreapi />} />
         <Route path="/products" element={<Products />} />
         <Route path="/productsInfo/:productId" element={<ProductsInfo />} />
         <Route path="/mycart" element={<Mycart />} />
         <Route path="/usememo" element={<UseMemoExample />} />
-       <Route path="/usecallback" element={<UseCallbackExample />} />
+        <Route path="/usecallback" element={<UseCallbackExample />} />
+        <Route path="/useref" element={<UseRefExample />} />
+       <Route path="/usereducer" element={<UseReducerExample />} />
 
-       
+
+
+
+
+
+
 
 
 

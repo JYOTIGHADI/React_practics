@@ -21,6 +21,8 @@ const Navbar = () => {
       {/* <button onClick={() => router("/mycart")}>My Cart</button> */}
       <button onClick={() => router("/UseMemo")}>UseMemo</button>
       <button onClick={() => router("/UseCallback")}>UseCallback</button>
+      <button onClick={() => router("/UseRef")}>UseRef</button>
+      <button onClick={() => router("/UseReducer")}>UseReducer</button>
     </>
   );
 };

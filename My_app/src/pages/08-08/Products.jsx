@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Product.css"; 
+import "./product.css"; // if file name is product.css
+
 
 const Products = () => {
   const [data, setData] = useState([]);
