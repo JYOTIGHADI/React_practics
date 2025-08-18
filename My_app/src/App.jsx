@@ -1,5 +1,5 @@
 import './App.css'
-// import axios from 'axios'
+import axios from 'axios'
 import { Route, Router, Routes } from 'react-router-dom'
 import Navbar from './component/navbar'
 import Home from './pages/Home'
@@ -13,31 +13,19 @@ import Todo from './pages/02-08/Todo'
 import NotFound from './pages/06-08/Notfount'
 import Fakestoreapi from './pages/06-08/Fakestoreapi'
 import Products from './pages/08-08/Products'
-// import ProductsInfo from './pages/08-08/ProductsInfo'
-import Mycart from './pages/08-08/Mycart'
 import ProductsInfo from './pages/08-08/ProductsInfo'
+import Mycart from './pages/08-08/Mycart'
 import UseMemoExample from './pages/10-08/UseMemo';
 import UseCallbackExample from './pages/10-08/UseCallback';
 import UseRefExample from './pages/13-08/UseRef';
-// import UseReduceExample from './pages/13-08/UseReduce';
 import UseReducerExample from './pages/13-08/UseReduce'
 
-
-
-
-
-
-
-
-
-
-
-// import Delete from './pages/02-08/Delete'
 
 function App() {
   return (
     <>
       <Navbar />
+
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />
@@ -56,25 +44,7 @@ function App() {
         <Route path="/usememo" element={<UseMemoExample />} />
         <Route path="/usecallback" element={<UseCallbackExample />} />
         <Route path="/useref" element={<UseRefExample />} />
-       <Route path="/usereducer" element={<UseReducerExample />} />
-
-
-
-
-
-
-
-
-
-
-        {/* <Route path='/delete' element={<Delete />} /> */}
-
-
-
-
-
-
-
+        <Route path="/usereducer" element={<UseReducerExample />} />
 
 
       </Routes>
@@ -83,4 +53,3 @@ function App() {
 }
 
 export default App
-
