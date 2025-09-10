@@ -1,6 +1,6 @@
 import './App.css'
-import axios from 'axios'
-import { Route, Router, Routes } from 'react-router-dom'
+// import axios from 'axios'
+import { Route, Routes } from 'react-router-dom'
 import Navbar from './component/navbar'
 import Home from './pages/Home'
 import Login from './pages/Login'
@@ -18,7 +18,11 @@ import Mycart from './pages/08-08/Mycart'
 import UseMemoExample from './pages/10-08/UseMemo';
 import UseCallbackExample from './pages/10-08/UseCallback';
 import UseRefExample from './pages/13-08/UseRef';
-import UseReducerExample from './pages/13-08/UseReduce'
+import UseReducerExample from './pages/13-08/UseReduce';
+import ProductList from './pages/23-08/assignment/redux/ProductList'
+import CounterRedux from "./redux/CounterRedux";
+import Calculator from './pages/30-08/assignment/Calculator'
+
 
 
 function App() {
@@ -45,6 +49,9 @@ function App() {
         <Route path="/usecallback" element={<UseCallbackExample />} />
         <Route path="/useref" element={<UseRefExample />} />
         <Route path="/usereducer" element={<UseReducerExample />} />
+        <Route path="/redux-counter" element={<CounterRedux />} />   
+        <Route path="/redux-addtocart" element={<ProductList />} />
+         <Route path="/calculator" element={<Calculator />} />
 
 
       </Routes>
@@ -53,5 +60,4 @@ function App() {
 }
 
 export default App
-
 

@@ -21,8 +21,11 @@ const Navbar = () => {
       {/* <button onClick={() => router("/mycart")}>My Cart</button> */}
       {/* <button onClick={() => router("/UseMemo")}>UseMemo</button> */}
       {/* <button onClick={() => router("/UseCallback")}>UseCallback</button> */}
-      <button onClick={() => router("/UseRef")}>UseRef</button>
-      <button onClick={() => router("/UseReducer")}>UseReducer</button>
+      {/* <button onClick={() => router("/UseRef")}>UseRef</button>
+      <button onClick={() => router("/UseReducer")}>UseReducer</button> */}
+      {/* <button onClick={() => router("/redux-counter")}>Redux Counter</button> */}
+      <button onClick={() => router("/redux-addtocart")}>Redux Add to Cart</button>
+      <button onClick={() => router("/calculator")}>Calculator</button>
       
     </>
   );
