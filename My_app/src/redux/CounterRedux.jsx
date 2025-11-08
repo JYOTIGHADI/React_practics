@@ -1,16 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment } from "./counterSlice";
+// import { increment, decrement } from "./counterSlice.js";
 
 const CounterRedux = () => {
   const { counter } = useSelector((store) => store.counter);
   const dispatch = useDispatch();
+
   return (
     <>
       <h1>Redux Counter : {counter}</h1>
       <button onClick={() => dispatch(increment())}>Increment</button>
       <button onClick={() => dispatch(decrement())}>Decrement</button>
+
     </>
   );
 };
 
 export default CounterRedux;
+

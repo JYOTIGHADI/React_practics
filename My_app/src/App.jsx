@@ -21,11 +21,40 @@ import UseRefExample from './pages/13-08/UseRef';
 import UseReducerExample from './pages/13-08/UseReduce';
 import ProductList from './pages/23-08/assignment/redux/ProductList'
 import CounterRedux from "./redux/CounterRedux";
-import Calculator from './pages/30-08/assignment/Calculator'
+import Calculator from './pages/30-08/assignment/Calculator';
+import api from "./axios/axiosConfig.js";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginSuccess } from "./redux/userSlice";
+
 
 
 
 function App() {
+   const dispatch = useDispatch();
+  const user = useSelector((state) => state.userData.user);
+
+  async function getUserData() {
+    try {
+      const response = await api.get("/auth/getCurrentUser");
+      console.log("user data", response.data);
+
+      if (response.status === 200) {
+        dispatch(loginSuccess(response.data.user));
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
+  useEffect(() => {
+    if (user) {
+      // If user is already authenticated, no need to fetch again
+      console.log(user, "user already authenticated");
+    } else {
+      getUserData();
+    }
+  }, [user]);
   return (
     <>
       <Navbar />
@@ -60,4 +89,3 @@ function App() {
 }
 
 export default App
-

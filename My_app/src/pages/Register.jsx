@@ -1,164 +1,165 @@
+import React, { useState } from "react";
+import axios from "axios";
 
-import { useState } from "react";
-
-function Register() {
+const Register = () => {
   const [userData, setUserData] = useState({
     name: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    cpassword: "",
   });
-  const [allUser, setAllUser] = useState([]);
-  const [popup, setPopup] = useState({ show: false, text: "", type: "" });
 
-  const handleChange = (event) => {
-    setUserData({ ...userData, [event.target.name]: event.target.value });
+  const [error, setError] = useState({});
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    cpassword: false,
+  });
+
+  // Handle input changes
+  const handleChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+    setError({ ...error, [e.target.name]: "" });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const { name, email, password, confirmPassword } = userData;
+  // Handle form submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    if (!name || !email || !password || !confirmPassword) {
-      showPopup(" Please fill in all fields.", "error");
+    let newErrors = {};
+
+    if (!userData.name) newErrors.name = "Name is required";
+    if (!userData.email) newErrors.email = "Email is required";
+    if (!userData.password) newErrors.password = "Password is required";
+    if (!userData.cpassword) newErrors.cpassword = "Confirm password is required";
+
+    if (userData.password && userData.cpassword && userData.password !== userData.cpassword) {
+      newErrors.cpassword = "Passwords do not match";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setError(newErrors);
       return;
     }
 
-    if (password !== confirmPassword) {
-      showPopup(" Passwords do not match.", "error");
-      return;
+    try {
+      const res = await axios.post("http://localhost:8000/api/v1/auth/register", userData);
+
+      if (res.data.success) {
+        alert(res.data.message);
+        setUserData({ name: "", email: "", password: "", cpassword: "" });
+        setError({});
+        setShowPassword({ password: false, cpassword: false });
+      } else {
+        alert(res.data.message);
+      }
+    } catch (err) {
+      alert(err.response?.data?.message || "Registration failed. Please try again.");
     }
-
-    setAllUser([...allUser, userData]);
-    setUserData({ name: "", email: "", password: "", confirmPassword: "" });
-    showPopup(" Registration successful!", "success");
-  };
-
-  const showPopup = (text, type) => {
-    setPopup({ show: true, text, type });
-    setTimeout(() => {
-      setPopup({ show: false, text: "", type: "" });
-    }, 3000);
   };
 
   return (
-    <div style={styles.container}>
-      <h1 style={{ textAlign: "center" }}>Register Page</h1>
+    <div
+      style={{
+        maxWidth: "400px",
+        margin: "40px auto",
+        padding: "20px",
+        border: "1px solid #ccc",
+        borderRadius: "10px",
+        boxShadow: "0 5px 15px rgba(0,0,0,0.1)",
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Register</h2>
 
-      {popup.show && (
-        <div
-          style={{
-            ...styles.popup,
-            backgroundColor: popup.type === "error" ? "#ffcccc" : "#7ae77aff",
-            color: popup.type === "error" ? "#cc0000" : "#006600",
-          }}
-        >
-          {popup.text}
+      <form onSubmit={handleSubmit}>
+        {/* Name */}
+        <div style={{ marginBottom: "12px", textAlign: "left" }}>
+          <label>Name:</label>
+          <input
+            name="name"
+            type="text"
+            value={userData.name}
+            onChange={handleChange}
+            style={{ width: "95%", padding: "8px", borderRadius: "5px", border: "1px solid #ccc", marginTop: "4px" }}
+          />
+          {error.name && <p style={{ color: "red", fontSize: "0.9em" }}>{error.name}</p>}
         </div>
-      )}
 
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <label>Name</label>
-        <input
-          type="text"
-          name="name"
-          onChange={handleChange}
-          value={userData.name}
-          placeholder="Enter your name"
-        />
+        {/* Email */}
+        <div style={{ marginBottom: "12px", textAlign: "left" }}>
+          <label>Email:</label>
+          <input
+            name="email"
+            type="email"
+            value={userData.email}
+            onChange={handleChange}
+            style={{ width: "95%", padding: "8px", borderRadius: "5px", border: "1px solid #ccc", marginTop: "4px" }}
+          />
+          {error.email && <p style={{ color: "red", fontSize: "0.9em" }}>{error.email}</p>}
+        </div>
 
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          onChange={handleChange}
-          value={userData.email}
-          placeholder="Enter your email"
-        />
-
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={handleChange}
-          value={userData.password}
-          placeholder="Enter password"
-        />
-
-        <label>Confirm Password</label>
-        <input
-          type="password"
-          name="confirmPassword"
-          onChange={handleChange}
-          value={userData.confirmPassword}
-          placeholder="Confirm password"
-        />
-
-        <button type="submit" style={styles.button}>
-        Login
-        </button>
-      </form>
-
-      <div>
-        <h2 style={{ marginTop: "30px", textAlign: "center" }}>All Users</h2>
-        {allUser.map((user, idx) => (
-          <div key={idx} style={styles.userCard}>
-            <h3>User {idx + 1}</h3>
-            <p><strong>Name:</strong> {user.name}</p>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Password:</strong> {user.password}</p>
+        {/* Password */}
+        <div style={{ marginBottom: "12px", textAlign: "left" }}>
+          <label>Password:</label>
+          <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
+            <input
+              name="password"
+              type={showPassword.password ? "text" : "password"}
+              value={userData.password}
+              onChange={handleChange}
+              style={{ flex: 1, padding: "8px", borderRadius: "5px", border: "1px solid #ccc" }}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(prev => ({ ...prev, password: !prev.password }))}
+              style={{ padding: "8px 12px", borderRadius: "5px", border: "1px solid #ccc", cursor: "pointer" }}
+            >
+              {showPassword.password ? "Hide" : "Show"}
+            </button>
           </div>
-        ))}
-      </div>
+          {error.password && <p style={{ color: "red", fontSize: "0.9em" }}>{error.password}</p>}
+        </div>
+
+        {/* Confirm Password */}
+        <div style={{ marginBottom: "12px", textAlign: "left" }}>
+          <label>Confirm Password:</label>
+          <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
+            <input
+              name="cpassword"
+              type={showPassword.cpassword ? "text" : "password"}
+              value={userData.cpassword}
+              onChange={handleChange}
+              style={{ flex: 1, padding: "8px", borderRadius: "5px", border: "1px solid #ccc" }}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(prev => ({ ...prev, cpassword: !prev.cpassword }))}
+              style={{ padding: "8px 12px", borderRadius: "5px", border: "1px solid #ccc", cursor: "pointer" }}
+            >
+              {showPassword.cpassword ? "Hide" : "Show"}
+            </button>
+          </div>
+          {error.cpassword && <p style={{ color: "red", fontSize: "0.9em" }}>{error.cpassword}</p>}
+        </div>
+
+        {/* Submit */}
+        <input
+          type="submit"
+          value="Register"
+          style={{
+            width: "100%",
+            padding: "10px",
+            backgroundColor: "#4caf50",
+            color: "#fff",
+            fontSize: "16px",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        />
+      </form>
     </div>
   );
-}
-
-const styles = {
-  container: {
-    maxWidth: "500px",
-    margin: "auto",
-    padding: "20px",
-    fontFamily: "Arial, sans-serif",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-    padding: "20px",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-
-  },
-  button: {
-    padding: "10px",
-    backgroundColor: "#007bff",
-    color: "white",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
-  },
-  userCard: {
-
-    margin: "10px auto",
-    padding: "15px",
-    borderRadius: "8px",
-    textAlign: "center",
-    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-  },
-  popup: {
-    position: "fixed",
-    top: "20px",
-    left: "50%",
-    transform: "translateX(-50%)",
-
-    padding: "100px 80px",
-    borderRadius: "6px",
-    fontWeight: "bold",
-    textAlign: "center",
-
-  },
 };
 
 export default Register;
-

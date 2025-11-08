@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CalculatorContext } from "./CalcContext/CalculatorContext";
+import CalculatorProvider, { CalculatorContext } from "./CalcContext/CalculatorContext";
 
 const Calculator = () => {
   const { state, dispatch } = useContext(CalculatorContext);
