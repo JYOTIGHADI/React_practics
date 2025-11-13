@@ -119,7 +119,7 @@ import NotFound from "./pages/06-08/Notfount";
 import Fakestoreapi from "./pages/06-08/Fakestoreapi";
 import Products from "./pages/08-08/Products";
 import ProductsInfo from "./pages/08-08/ProductsInfo";
-import Mycart from "./pages/08-08/Mycart";
+// import Mycart from "./pages/08-08/Mycart";
 import UseMemoExample from "./pages/10-08/UseMemo";
 import UseCallbackExample from "./pages/10-08/UseCallback";
 import UseRefExample from "./pages/13-08/UseRef";
@@ -133,7 +133,10 @@ import api from "./axios/axiosConfig.js";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "./redux/userSlice.js"; // ✅ correct import
-import MyCart from "./pages/cart.jsx";
+import MyCart from "./pages/cartpage.jsx";
+import UserProducts from "./pages/UserProducts";
+import ViewAllProducts from "./pages/ViewAllproducts.jsx";  
+
 
 function App() {
   const dispatch = useDispatch();
@@ -158,7 +161,11 @@ function App() {
     }
   }, [dispatch, user]);
 
+
+
   return (
+
+    
     <div style={{ textAlign: "center", marginTop: "100px" }}>
       <Navbar />
       <h1>
@@ -168,7 +175,7 @@ function App() {
           ? "Seller Page"
           : ""} */}
       </h1>
-      <h1>Hello, {user?.name}</h1>
+      <h1>Hello {user?.name}</h1>
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -194,10 +201,19 @@ function App() {
          <Route path="/calculator" element={<Calculator />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/view-products" element={<ViewProducts />} />
-        <Route path="/cart" element={<MyCart />} />
+        <Route path="/viewallproducts" element={<ViewAllProducts />} />
+
+
+
+        <Route path="/cartpage" element={<MyCart />} />
+        <Route path="/user-products" element={<UserProducts />} />
+
 
         
 
+    
+      
+    
 
 
        

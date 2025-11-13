@@ -9,6 +9,7 @@ const ViewAllProducts = () => {
   const [cartMessage, setCartMessage] = useState("");
 
   const categories = ["shoes", "shirts", "t-shirts", "jeans"];
+
   // Fetch products with optional filters
   const fetchProducts = async () => {
     try {
@@ -33,10 +34,12 @@ const ViewAllProducts = () => {
     }
   };
 
+  // Fetch on mount and whenever selectedCategories changes
   useEffect(() => {
     fetchProducts();
   }, [selectedCategories]);
 
+  // Handle category checkbox toggle
   const handleCategoryChange = (category) => {
     setSelectedCategories((prev) =>
       prev.includes(category)
@@ -45,26 +48,20 @@ const ViewAllProducts = () => {
     );
   };
 
-  // Add to Cart handler
+  // Handle Add to Cart (auth required)
   const handleAddToCart = async (productId) => {
     try {
-      if (!productId) return alert("Product ID is missing!");
-
-      const res = await api.post("/cart/add", { productId });
-
+      const res = await api.post("/carts/add", { productId }); // userId from JWT token automatically
       if (res.data.success) {
         setCartMessage(res.data.message || "Added to cart!");
         setTimeout(() => setCartMessage(""), 2000);
-        alert(res.data.message || "Added to cart!");
-      } else {
-        alert(res.data.message || "Failed to add product to cart");
       }
     } catch (error) {
       console.error(error);
       if (error.response?.status === 401) {
         alert("Please log in to add items to your cart.");
       } else {
-        alert(error.response?.data?.message || "Server error while adding to cart.");
+        alert(error.response?.data?.message || "Error adding to cart");
       }
     }
   };
@@ -74,14 +71,16 @@ const ViewAllProducts = () => {
 
   if (error)
     return (
-      <p style={{ textAlign: "center", color: "red", marginTop: "40px" }}>{error}</p>
+      <p style={{ textAlign: "center", color: "red", marginTop: "40px" }}>
+        {error}
+      </p>
     );
 
   return (
     <div
       style={{
         minHeight: "100vh",
-        // backgroundColor: "#f5f5f5",
+        backgroundColor: "#f5f5f5",
         padding: "40px 15px",
       }}
     >
@@ -90,6 +89,9 @@ const ViewAllProducts = () => {
           maxWidth: "1200px",
           margin: "0 auto",
           padding: "20px",
+          background: "#fff",
+          borderRadius: "10px",
+          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
         <h2
@@ -97,7 +99,7 @@ const ViewAllProducts = () => {
             textAlign: "center",
             marginBottom: "30px",
             fontSize: "24px",
-            color: "white",
+            color: "#333",
           }}
         >
           All Products
@@ -109,7 +111,7 @@ const ViewAllProducts = () => {
             display: "flex",
             justifyContent: "center",
             flexWrap: "wrap",
-            gap: "12px",
+            gap: "15px",
             marginBottom: "25px",
           }}
         >
@@ -119,13 +121,12 @@ const ViewAllProducts = () => {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "6px",
+                gap: "8px",
                 background: "#f9f9f9",
                 padding: "8px 14px",
                 borderRadius: "8px",
                 border: "1px solid #ddd",
                 cursor: "pointer",
-                transition: "0.2s",
               }}
             >
               <input
@@ -134,14 +135,20 @@ const ViewAllProducts = () => {
                 onChange={() => handleCategoryChange(category)}
                 style={{ transform: "scale(1.2)" }}
               />
-              <span style={{ fontSize: "14px", fontWeight: "500", color: "#333" }}>
+              <span
+                style={{
+                  fontSize: "15px",
+                  fontWeight: "500",
+                  color: "#333",
+                }}
+              >
                 {category}
               </span>
             </label>
           ))}
         </div>
 
-        {/* Inline Cart Message */}
+        {/* Cart Message */}
         {cartMessage && (
           <p
             style={{
@@ -161,69 +168,92 @@ const ViewAllProducts = () => {
         ) : (
           <div
             style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "20px",
-              justifyContent: "flex-start",
+              display: "grid",
+              gridTemplateColumns:
+                "repeat(auto-fill, minmax(clamp(220px, 30%, 300px), 1fr))",
+              gap: "25px",
+              justifyContent: "left",
             }}
           >
             {products.map((product) => (
               <div
                 key={product._id}
                 style={{
-                  flex: "1 1 250px",
-                  maxWidth: "300px",
                   background: "#fff",
+                  border: "1px solid #e0e0e0",
                   borderRadius: "12px",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
                   overflow: "hidden",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  boxShadow: "0 2px 5px rgba(0,0,0,0.05)",
+                  transition: "transform 0.25s ease, box-shadow 0.25s ease",
                   cursor: "pointer",
+                  position: "relative",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-5px)";
-                  e.currentTarget.style.boxShadow = "0 8px 20px rgba(0,0,0,0.15)";
+                  e.currentTarget.style.transform = "translateY(-6px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 6px 15px rgba(0,0,0,0.1)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.08)";
+                  e.currentTarget.style.boxShadow =
+                    "0 2px 5px rgba(0,0,0,0.05)";
                 }}
               >
                 <img
                   src={product.imageUrl}
                   alt={product.title}
-                  style={{ width: "100%", height: "180px", objectFit: "cover" }}
+                  style={{
+                    width: "100%",
+                    height: "220px",
+                    objectFit: "cover",
+                    display: "block",
+                    backgroundColor: "#f3f3f3",
+                  }}
                 />
-                <div style={{ padding: "12px" }}>
+                <div style={{ padding: "15px" }}>
                   <h4
                     style={{
-                      fontSize: "17px",
+                      marginBottom: "8px",
+                      fontSize: "18px",
                       color: "#111",
-                      marginBottom: "6px",
+                      lineHeight: "1.3",
                     }}
                   >
                     {product.title}
                   </h4>
-                  <p style={{ margin: "3px 0", color: "#555", fontSize: "13px" }}>
+                  <p style={{ margin: "5px 0", color: "#555" }}>
                     <b>Category:</b> {product.category}
                   </p>
-                  <p style={{ margin: "3px 0", color: "#555", fontSize: "13px" }}>
+                  <p style={{ margin: "5px 0", color: "#555" }}>
                     <b>Brand:</b> {product.brand}
                   </p>
-                  <p style={{ margin: "3px 0", color: "#111", fontWeight: "500" }}>
-                    ₹{product.price}
+                  <p style={{ margin: "5px 0", color: "#111" }}>
+                    <b>Price:</b> ₹{product.price}
                   </p>
                   <p
                     style={{
-                      margin: "6px 0",
+                      margin: "10px 0",
                       color: "#666",
-                      fontSize: "13px",
-                      minHeight: "36px",
+                      fontSize: "14px",
+                      minHeight: "40px",
                     }}
                   >
-                    {product.description?.slice(0, 60)}...
+                    <b>Description:</b> {product.description.slice(0, 60)}...
+                  </p>
+                  <p
+                    style={{
+                      margin: "5px 0",
+                      color: "#999",
+                      fontSize: "13px",
+                    }}
+                  >
+                    <small>
+                      Added on:{" "}
+                      {new Date(product.createdAt).toLocaleDateString()}
+                    </small>
                   </p>
 
+                  {/* ✅ Add to Cart Button */}
                   <button
                     onClick={() => handleAddToCart(product._id)}
                     style={{
@@ -231,14 +261,12 @@ const ViewAllProducts = () => {
                       background: "#32C0B7",
                       color: "#fff",
                       border: "none",
-                      padding: "8px 0",
+                      padding: "8px 12px",
                       borderRadius: "6px",
                       cursor: "pointer",
                       fontWeight: "500",
-                      transition: "0.2s",
+                      marginTop: "10px",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = "#28a197")}
-                    onMouseLeave={(e) => (e.currentTarget.style.background = "#32C0B7")}
                   >
                     Add to Cart
                   </button>
